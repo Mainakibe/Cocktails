@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
 import { useParams, Link } from 'react-router-dom';
-const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=`;
 
 const SingleCocktail = () => {
   const { id } = useParams();
@@ -10,12 +9,13 @@ const SingleCocktail = () => {
   const [cocktails, setCocktails] = useState(null);
 
   const getData = async () => {
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     try {
       const res = await fetch(url);
       const data = await res.json();
       if (data.drinks) {
         const {
-          idDrink: id,
+         
           strDrink: name,
           strDrinkThumb: image,
           strCategory: category,
@@ -35,7 +35,7 @@ const SingleCocktail = () => {
           strIngredient5,
         ];
         const newCocktail = {
-          id,
+        
           name,
           image,
           info,
@@ -92,7 +92,7 @@ const SingleCocktail = () => {
             {instructions}
           </p>
           <p>
-            ingredients :{' '}
+            <span className="dink-data">ingredients :</span>
             {ingredients.map((item, index) => {
               return item ? (
                 <span className="drink-data" key={index}>
